@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spam
+  labels:
+    app: spam-app
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: spam-app
+  template:
+    metadata:
+      labels:
+        app: spam-app
+    spec:
+      containers:
+      - name: spam
+        image: alet36/spam
+        resources:
+          requests:
+            cpu: 600m
+            memory: 50Mi
+          limits:
+            cpu: 950m
+            memory: 150Mi
+          
+---
+apiVersion: v1
+# Indicates this as a service
+kind: Service
+metadata:
+  # Service name
+  name: spam
+  namespace: default
+spec:
+  type: NodePort
+  selector:
+    # Selector for Pods
+    app: spam-app
+  ports:
+  # Port Map
+  - port: 8501
+    targetPort: 8501
+    nodePort: 30080
