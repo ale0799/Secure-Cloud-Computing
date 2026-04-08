@@ -37,3 +37,7 @@ The final report includes:
 - Kubernetes Dashboard
 - Kind
 - Wrk
+
+## Author
+- Alessia Lettieri (ale0799)
+- Marco Panico (mpanico20)
